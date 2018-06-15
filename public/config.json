@@ -1,0 +1,74 @@
+{
+    "workflowApiVersion": "1.1",
+    "metaData": {
+        "icon": "images/icon.png",
+        "iconSmall": "images/iconSmall.png",
+        "category": "message"
+    },
+    "type": "REST",
+    "lang": {
+        "en-US": {
+            "name": "Insert Rows",
+           "description": "An activity to insert net new rows into Data Extensions.",
+            "step1Label": "Configure Activity"
+        }
+    },
+    "arguments": {
+        "execute": {
+           "inArguments":[
+				{
+                    "emailAddress": "{{Contact.Attribute.CustomActivity.EmailAddress}}"
+                }									
+			],
+          "outArguments": [],
+          "url": "https://shane-jb.herokuapp.com/insertRow/execute",
+           "verb": "POST",
+            "body": "",
+            "header": "",
+            "format": "json",
+            "useJwt": true,
+            "timeout": 10000
+        }
+    },
+    "configurationArguments": {
+      "applicationExtensionKey": "a2e9bdd5-65f5-43f7-89b0-9a1ec08d0790",
+      "save": {
+        "url": "https://shane-jb.herokuapp.com/insertRow/save",
+          "verb": "POST",
+        "useJwt": true
+       },
+       "publish": {
+        "url": "https://shane-jb.herokuapp.com/insertRow/publish",
+           "verb": "POST",
+        "useJwt": true
+       },
+      "stop": {
+        "url": "https://shane-jb.herokuapp.com/insertRow/stop",
+           "verb": "POST",
+        "useJwt": true
+      },
+      "validate": {
+        "url": "https://shane-jb.herokuapp.com/insertRow/validate",
+        "verb": "POST",
+        "useJwt": true
+      }
+    },
+    "wizardSteps": [
+        { "label": "Configure Row Insert", "key": "step1" }
+    ],
+    "userInterfaces": {
+        "configModal": {
+            "height": 400,
+            "width": 1000,
+          "fullscreen": false
+        }
+    },
+    "schema": {
+        "arguments": {
+            "execute": {
+                "inArguments": [],
+                "outArguments": []
+            }
+        }
+    }
+}
