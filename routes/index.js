@@ -7,7 +7,7 @@ var activity = require('./activity');
  * GET home page.
  */
 exports.index = function(req, res){
-    if( !req.session.token ) {
+    /* if( !req.session.token ) {
         res.render( 'index', {
             title: 'Unauthenticated',
             errorMessage: 'This app may only be loaded via Salesforce Marketing Cloud',
@@ -17,7 +17,11 @@ exports.index = function(req, res){
             title: 'Journey Builder Activity',
             results: activity.logExecuteData,
         });
-    }
+    } */
+    res.render( 'index', {
+        title: 'Journey Builder Activity',
+        results: activity.logExecuteData,
+    });
 };
 
 exports.login = function( req, res ) {
