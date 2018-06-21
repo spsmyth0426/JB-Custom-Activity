@@ -5,7 +5,7 @@
         "iconSmall": "images/iconSmall.png",
         "category": "customer"
     },
-    "type": "REST",
+    "type": "Rest",
     "lang": {
         "en-US": {
             "name": "Insert Rows",
@@ -21,7 +21,7 @@
                 }									
 			],
           "outArguments": [],
-          "url": "https://shane-jb.herokuapp.com/insertRow/execute",
+          "url": "https://shane-jb.herokuapp.com/execute",
            "verb": "POST",
             "body": "",
             "header": "",
@@ -31,24 +31,23 @@
         }
     },
     "configurationArguments": {
-      "applicationExtensionKey": "a2e9bdd5-65f5-43f7-89b0-9a1ec08d0790",
       "save": {
-        "url": "https://shane-jb.herokuapp.com/insertRow/save",
+        "url": "https://shane-jb.herokuapp.com/save",
           "verb": "POST",
         "useJwt": true
        },
        "publish": {
-        "url": "https://shane-jb.herokuapp.com/insertRow/publish",
+        "url": "https://shane-jb.herokuapp.com/publish",
            "verb": "POST",
         "useJwt": true
        },
       "stop": {
-        "url": "https://shane-jb.herokuapp.com/insertRow/stop",
+        "url": "https://shane-jb.herokuapp.com/stop",
            "verb": "POST",
         "useJwt": true
       },
       "validate": {
-        "url": "https://shane-jb.herokuapp.com/insertRow/validate",
+        "url": "https://shane-jb.herokuapp.com/validate",
         "verb": "POST",
         "useJwt": true
       }
