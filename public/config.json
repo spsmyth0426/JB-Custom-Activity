@@ -21,35 +21,21 @@
                 }									
 			],
           "outArguments": [],
-          "url": "https://shane-jb.herokuapp.com/execute",
-           "verb": "POST",
-            "body": "",
-            "header": "",
-            "format": "json",
-            "useJwt": true,
-            "timeout": 10000
+          "url": "https://shane-jb.herokuapp.com/execute"
         }
     },
     "configurationArguments": {
       "save": {
-        "url": "https://shane-jb.herokuapp.com/save",
-          "verb": "POST",
-        "useJwt": true
+        "url": "https://shane-jb.herokuapp.com/save"
        },
        "publish": {
-        "url": "https://shane-jb.herokuapp.com/publish",
-           "verb": "POST",
-        "useJwt": true
+        "url": "https://shane-jb.herokuapp.com/publish"
        },
       "stop": {
-        "url": "https://shane-jb.herokuapp.com/stop",
-           "verb": "POST",
-        "useJwt": true
+        "url": "https://shane-jb.herokuapp.com/stop"
       },
       "validate": {
-        "url": "https://shane-jb.herokuapp.com/validate",
-        "verb": "POST",
-        "useJwt": true
+        "url": "https://shane-jb.herokuapp.com/validate"
       }
     },
     "wizardSteps": [
