@@ -74,7 +74,7 @@ exports.save = function (req, res) {
 exports.execute = function (req, res) {
 
     // example on how to decode JWT
-    JWT(req.body, process.env.jwtSecret, (err, decoded) => {
+    JWT(req.body, process.env.jwt_secret, (err, decoded) => {
 
         // verification error -> unauthorized request
         if (err) {
@@ -86,7 +86,9 @@ exports.execute = function (req, res) {
             
             // decoded in arguments
             var decodedArgs = decoded.inArguments[0];
-            
+            console.log(decodedArgs);
+            //authToken(process.env.clientId, process.env.clientSecret, email, contact, status, responseId);
+
             logData(req);
             res.send(200, 'Execute');
         } else {
@@ -116,3 +118,61 @@ exports.validate = function (req, res) {
     logData(req);
     res.send(200, 'Validate');
 };
+
+
+/*START EDIT*/
+/**********************/
+// CALL FOR AUTHORIZATION
+/**********************/
+function authToken(clientId, clientSecret, email, contact, status, responseId){
+    var options = {
+        url: 'http://auth.exacttargetapis.com/v1/requestToken',
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+            },
+        form: {'clientId': clientId, 'clientSecret': clientSecret}
+    }
+
+    request(options, function (error, response, body) {
+        if (!error && response.statusCode == 200) {
+            // Print out the response body
+            console.log('Bearer: Sucess');
+            let json = JSON.parse(body);
+            console.log(json);
+            var accessToken = json.accessToken;
+            postDE(accessToken, email, contact, status, responseId);
+        }else{
+            console.log('Bearer: Error');
+        }
+    })
+}
+
+/**********************/
+// POST DATA
+/**********************/
+function postDE(accessToken, email, contact, status, responseId){
+    var optionsDE = {
+        url: 'https://www.exacttargetapis.com/hub/v1/dataevents/key:Letter_Mail_Response/rows/EmailAddress:'+email,
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer '+accessToken
+        },
+        form: {'values': {'ContactId': contact, 'Status': 'Confirmed', 'ResponseId': responseId}}
+        //body: [ { "keys": { "EmailAddress": email },"values": { "ContactId": contact, "Status": status } } ],
+        //json: true
+    }
+    console.log(optionsDE);
+
+    request(optionsDE, function (error, response, body) {
+        if (!error && response.statusCode == 200) {
+            // Print out the response body
+            console.log('Post to DE successful');
+        }else{
+            console.log('Post to DE: error');
+            console.log(body);
+        }
+    })
+}
+/*END EDIT*/
