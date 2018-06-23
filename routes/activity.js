@@ -87,7 +87,8 @@ exports.execute = function (req, res) {
             // decoded in arguments
             var decodedArgs = decoded.inArguments[0];
             console.log(decodedArgs);
-            //authToken(process.env.clientId, process.env.clientSecret, email, contact, status, responseId);
+            var colValArray = { "EmailAddress": "shane.smyth@slalom.com", "FirstName": "Shane" };
+            //authToken(process.env.clientId, process.env.clientSecret, 'LogDE', colValArray, status, responseId);
 
             logData(req);
             res.send(200, 'Execute');
@@ -120,11 +121,10 @@ exports.validate = function (req, res) {
 };
 
 
-/*START EDIT*/
 /**********************/
 // CALL FOR AUTHORIZATION
 /**********************/
-function authToken(clientId, clientSecret, email, contact, status, responseId){
+function authToken(clientId, clientSecret, de, colValArray, status, responseId){
     var options = {
         url: 'http://auth.exacttargetapis.com/v1/requestToken',
         method: 'POST',
@@ -141,7 +141,7 @@ function authToken(clientId, clientSecret, email, contact, status, responseId){
             let json = JSON.parse(body);
             console.log(json);
             var accessToken = json.accessToken;
-            postDE(accessToken, email, contact, status, responseId);
+            postDE(accessToken, de, colValArray, status, responseId);
         }else{
             console.log('Bearer: Error');
         }
@@ -151,17 +151,17 @@ function authToken(clientId, clientSecret, email, contact, status, responseId){
 /**********************/
 // POST DATA
 /**********************/
-function postDE(accessToken, email, contact, status, responseId){
+function postDE(accessToken, de, colValArray, status, responseId){
     var optionsDE = {
-        url: 'https://www.exacttargetapis.com/hub/v1/dataevents/key:Letter_Mail_Response/rows/EmailAddress:'+email,
-        method: 'PUT',
+        url: 'https://www.exacttargetapis.com/data/v1/async/dataextensions/key:'+de+'/rows',
+        method: 'POST',
         headers: {
             'Content-Type': 'application/json',
             'Authorization': 'Bearer '+accessToken
         },
-        form: {'values': {'ContactId': contact, 'Status': 'Confirmed', 'ResponseId': responseId}}
-        //body: [ { "keys": { "EmailAddress": email },"values": { "ContactId": contact, "Status": status } } ],
-        //json: true
+        //form: {'values': {'ContactId': contact, 'Status': 'Confirmed', 'ResponseId': responseId}}
+        body: [ { "items": colValArray } ],
+        json: true
     }
     console.log(optionsDE);
 
@@ -175,4 +175,4 @@ function postDE(accessToken, email, contact, status, responseId){
         }
     })
 }
-/*END EDIT*/
+
