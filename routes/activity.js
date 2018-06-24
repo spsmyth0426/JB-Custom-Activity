@@ -98,10 +98,8 @@ exports.execute = function (req, res) {
         }
     });*/
 
-    if(req.body > 0){
-        console.log(req.body);
-        res.send(200, 'Publish');
-    };
+    logData(req);
+    res.send(200, 'Execute');
 };
 
 
