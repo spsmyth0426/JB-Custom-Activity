@@ -38,6 +38,11 @@ app.post('/validate/', activity.validate );
 app.post('/publish/', activity.publish );
 app.post('/execute/', activity.execute );
 
+app.post('/test', function(request, response){
+  console.log(request.body);      // your JSON
+  response.send(request.body);    // echo the result back
+});
+
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
 });
