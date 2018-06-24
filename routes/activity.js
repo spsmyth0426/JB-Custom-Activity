@@ -101,7 +101,7 @@ exports.execute = function (req, res) {
     logData(req);
     console.log(JSON.stringify(req.body, null, 4) + 'test');
     //res.send(200, 'Execute');
-    response.send(200, request.body);
+    response.send(200, req.body);
 };
 
 
