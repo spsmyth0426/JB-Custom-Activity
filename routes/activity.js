@@ -74,7 +74,7 @@ exports.save = function (req, res) {
 exports.execute = function (req, res) {
 
     // example on how to decode JWT
-    JWT(req.body, process.env.jwt_secret, (err, decoded) => {
+    /*JWT(req.body, process.env.jwt_secret, (err, decoded) => {
 
         // verification error -> unauthorized request
         if (err) {
@@ -96,7 +96,11 @@ exports.execute = function (req, res) {
             console.error('inArguments invalid.');
             return res.status(400).end();
         }
-    });
+    });*/
+
+    if(req.body > 0){
+        console.log(req.body);
+    };
 };
 
 
