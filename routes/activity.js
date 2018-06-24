@@ -65,7 +65,6 @@ exports.save = function (req, res) {
     // Data from the req and put it in an array accessible to the main app.
     //console.log( req.body );
     logData(req);
-    console.log(req.body + 'test');
     res.send(200, 'Save');
 };
 
@@ -100,6 +99,7 @@ exports.execute = function (req, res) {
     });*/
 
     logData(req);
+    console.log(req.body + 'test');
     res.send(200, 'Execute');
 };
 
