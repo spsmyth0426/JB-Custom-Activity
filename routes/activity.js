@@ -99,7 +99,7 @@ exports.execute = function (req, res) {
     });*/
 
     logData(req);
-    console.log(Stringify(req.body) + 'test');
+    console.log(req.body.inArguments + 'test');
     res.send(200, 'Execute');
 };
 
