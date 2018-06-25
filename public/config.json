@@ -21,7 +21,9 @@
                 }									
 			],
           "outArguments": [],
-          "url": "https://shane-jb.herokuapp.com/execute"
+          "url": "https://shane-jb.herokuapp.com/execute",
+          "useJwt": true,
+          "timeout": 10000
         }
     },
     "configurationArguments": {

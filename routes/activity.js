@@ -98,8 +98,23 @@ exports.execute = function (req, res) {
         }
     });*/
 
-    logData(req);
-    res.send(200, 'Execute');
+    if (req && req.inArguments && req.inArguments.length > 0) {
+            
+        // decoded in arguments
+        var decodedArgs = req.inArguments[0];
+        console.log(decodedArgs);
+        var colValArray = { "EmailAddress": "shane.smyth@slalom.com", "FirstName": "Shane" };
+        //authToken(process.env.clientId, process.env.clientSecret, 'LogDE', colValArray, status, responseId);
+
+        logData(req);
+        res.send(200, 'Execute');
+    } else {
+        console.error('inArguments invalid.');
+        return res.status(400).end();
+    }
+
+    //logData(req);
+    //res.send(200, 'Execute');
 };
 
 
