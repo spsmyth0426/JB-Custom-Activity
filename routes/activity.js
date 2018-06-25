@@ -101,7 +101,6 @@ exports.execute = function (req, res) {
     if (req.body.inArguments.length > 0) {
             
         // decoded in arguments
-        logData(req);
         var decodedArgs = req.body.inArguments[0];
         console.log(decodedArgs);
         var colValArray = { "EmailAddress": "shane.smyth@slalom.com", "FirstName": "Shane" };
