@@ -98,9 +98,10 @@ exports.execute = function (req, res) {
         }
     });*/
 
-    if (req && req.inArguments && req.inArguments.length > 0) {
+    if (req.inArguments.length > 0) {
             
         // decoded in arguments
+        logData(req);
         var decodedArgs = req.inArguments[0];
         console.log(decodedArgs);
         var colValArray = { "EmailAddress": "shane.smyth@slalom.com", "FirstName": "Shane" };
