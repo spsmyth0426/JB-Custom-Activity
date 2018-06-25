@@ -152,8 +152,8 @@ function authToken(clientId, clientSecret, de, inArgs){
         form: {'clientId': clientId, 'clientSecret': clientSecret}
     }
 
-    request(options, function (error, response, body) {
-        if (!error && response.statusCode == 200) {
+    request(options, function (error, res, body) {
+        if (!error && res.statusCode == 200) {
             // Print out the response body
             console.log('Bearer: Sucess');
             let json = JSON.parse(body);
