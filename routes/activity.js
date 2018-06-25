@@ -161,7 +161,7 @@ function authToken(clientId, clientSecret, de, inArgs){
             console.log(json);
             var accessToken = json.accessToken;
             console.log(accessToken);
-            //postDE(accessToken, de, inArgs);
+            postDE(accessToken, de, inArgs);
         }else{
             console.log('Bearer: Error');
         }
