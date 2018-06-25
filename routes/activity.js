@@ -101,10 +101,10 @@ exports.execute = function (req, res) {
     if (req.body.inArguments.length > 0) {
             
         // decoded in arguments
-        var decodedArgs = req.body.inArguments[0];
-        console.log(decodedArgs);
+        var inArgs = req.body.inArguments[0];
+        console.log(inArgs);
         var colValArray = { "EmailAddress": "shane.smyth@slalom.com", "FirstName": "Shane" };
-        //authToken(process.env.clientId, process.env.clientSecret, 'LogDE', colValArray, status, responseId);
+        authToken(process.env.clientId, process.env.clientSecret, 'LogDE', inArgs);
 
         logData(req);
         res.send(200, 'Execute');
@@ -142,7 +142,7 @@ exports.validate = function (req, res) {
 /**********************/
 // CALL FOR AUTHORIZATION
 /**********************/
-function authToken(clientId, clientSecret, de, colValArray, status, responseId){
+function authToken(clientId, clientSecret, de, inArgs){
     var options = {
         url: 'http://auth.exacttargetapis.com/v1/requestToken',
         method: 'POST',
@@ -159,7 +159,8 @@ function authToken(clientId, clientSecret, de, colValArray, status, responseId){
             let json = JSON.parse(body);
             console.log(json);
             var accessToken = json.accessToken;
-            postDE(accessToken, de, colValArray, status, responseId);
+            console.log(accessToken);
+            //postDE(accessToken, de, inArgs);
         }else{
             console.log('Bearer: Error');
         }
@@ -169,7 +170,7 @@ function authToken(clientId, clientSecret, de, colValArray, status, responseId){
 /**********************/
 // POST DATA
 /**********************/
-function postDE(accessToken, de, colValArray, status, responseId){
+function postDE(accessToken, de, inArgs){
     var optionsDE = {
         url: 'https://www.exacttargetapis.com/data/v1/async/dataextensions/key:'+de+'/rows',
         method: 'POST',
@@ -178,7 +179,7 @@ function postDE(accessToken, de, colValArray, status, responseId){
             'Authorization': 'Bearer '+accessToken
         },
         //form: {'values': {'ContactId': contact, 'Status': 'Confirmed', 'ResponseId': responseId}}
-        body: [ { "items": colValArray } ],
+        body: [ { "items": inArgs } ],
         json: true
     }
     console.log(optionsDE);
