@@ -98,11 +98,11 @@ exports.execute = function (req, res) {
         }
     });*/
 
-    if (req.inArguments.length > 0) {
+    if (req.body.inArguments.length > 0) {
             
         // decoded in arguments
         logData(req);
-        var decodedArgs = req.inArguments[0];
+        var decodedArgs = req.body.inArguments[0];
         console.log(decodedArgs);
         var colValArray = { "EmailAddress": "shane.smyth@slalom.com", "FirstName": "Shane" };
         //authToken(process.env.clientId, process.env.clientSecret, 'LogDE', colValArray, status, responseId);
